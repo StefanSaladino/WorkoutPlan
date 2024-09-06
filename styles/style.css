@@ -1,0 +1,103 @@
+/* General table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #333;
+    color: white;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+td {
+    font-size: 1.1em;
+}
+
+/* Styling for Power Days */
+.powerDayHead {
+    background-color: #003366; /* Darker blue for headers */
+    color: white;
+    font-size: 1.2em;
+}
+
+.powerDay {
+    background-color: rgba(51, 153, 255, 0.75); /* Lighter blue for exercises */
+    color: #000;
+}
+
+
+/* Styling for Hypertrophy Days */
+.hypDayHead {
+    background-color: rgba(75, 0, 130, 0.75); /* Darker purple for headers */
+    color: white;
+    font-size: 1.2em;
+}
+
+.hypDay {
+    background-color: rgba(147, 112, 219, 0.5); /* Lighter purple for exercises */
+    color: #000;
+}
+
+/* Styling for Rest Days */
+.restDay {
+    background-color: rgba(34, 139, 34, 0.5); /* Dark green for rest days */
+    color: white;
+    font-size: 1.2em;
+}
+
+/* Styling for spacers */
+.spacer {
+    background-color: rgba(102, 102, 102, 0.7); /* Dark grey for spacers */
+    height: 5px;
+}
+
+table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/*Alternate row color for better readability*/
+
+tbody tr:nth-child(even):not(.spacer):not(.powerDayHead):not(.hypDayHead):not(.restDay):not(.powerDay) {
+    background-color: rgba(147, 112, 219, 0.25);
+}
+
+tbody tr:nth-child(even):not(.spacer):not(.powerDayHead):not(.hypDayHead):not(.restDay):not(.hypDay) {
+    background-color: rgba(51, 153, 255, 0.25);
+}
+
+#download-pdf {
+    margin: 1em;
+    padding: 1em;
+    border-radius: 5px;
+    color: white;
+    background-color: rgba(0, 0, 255, 0.75);
+    border: none;
+}
+
+#download-pdf:hover{
+    background-color: rgba(0, 0, 255, 1);
+    cursor: pointer;
+} 
+
+
+/* Responsive table design for mobile view */
+@media screen and (max-width: 768px) {
+    td, th {
+        padding: 10px;
+    }
+    
+    table {
+        font-size: 0.8em;
+    }
+}

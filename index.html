@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Plan</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="scripts/script.js"></script>
+</head>
+<body>
+
+    <table id="workout-table">
+        <thead>
+            <tr>
+                <th>Exercise</th>
+                <th>Sets</th>
+                <th>Rep Range</th>
+                <th>Week 1</th>
+                <th>Week 2</th>
+                <th>Week 3</th>
+                <th>Week 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Day 1 -->
+            <tr class="powerDayHead"><td colspan="7"><strong>Day 1: Upper Body Power Day</strong></td></tr>
+            <tr>
+                <td>Pulling Power Movement: Bent over or Pendlay rows</td>
+                <td>3</td>
+                <td>3-5</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Assistance Pulling movement: Weighted Pull ups</td>
+                <td>2</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Auxiliary Pulling movement: Rack chins</td>
+                <td>2</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Pressing Power Movement: Flat dumbbell presses</td>
+                <td>3</td>
+                <td>3-5</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Assistance pressing movement: Weighted dips</td>
+                <td>2</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Assistance pressing movement: Seated dumbbell shoulder presses</td>
+                <td>3</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Auxiliary curling movement: Cambered bar curls</td>
+                <td>3</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Auxiliary extension movement: Skull crushers</td>
+                <td>3</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="spacer"><td colspan="7"></td></tr>
+            
+            <!-- Day 2 -->
+            <tr class="powerDayHead"><td colspan="7"><strong>Day 2: Lower Body Power Day</strong></td></tr>
+            <tr class="powerDay">
+                <td>Pressing Power Movement: Squats</td>
+                <td>3</td>
+                <td>3-5</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Assistance pressing movement: Hack Squats</td>
+                <td>2</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Assistance extension movement: Leg extensions</td>
+                <td>2</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Assistance pulling movement: Stiff legged deadlifts</td>
+                <td>3</td>
+                <td>5-8</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Assistance pulling/curling movement: Glute ham raises or lying leg curls</td>
+                <td>2</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Auxiliary calf movement: Standing calf raise</td>
+                <td>3</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="powerDay">
+                <td>Auxiliary calf movement: Seated calf raise</td>
+                <td>2</td>
+                <td>6-10</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="spacer"><td colspan="7"></td></tr>
+            
+            <!-- Day 3 -->
+            <tr class="restDay"><td colspan="7"><strong>Day 3: Rest</strong></td></tr>
+            <tr class="spacer"><td colspan="7"></td></tr>
+            
+            <!-- Day 4 -->
+            <tr class="hypDayHead"><td colspan="7"><strong>Day 4: Back and Shoulders Hypertrophy Day</strong></td></tr>
+            <tr class="hypDay">
+                <td>Pulling Power Exercise speed work: Bent over or Pendlay rows</td>
+                <td>6</td>
+                <td>3 (65-70% max)</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pulling movement: Rack chins</td>
+                <td>3</td>
+                <td>8-12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pulling movement: Seated cable row</td>
+                <td>3</td>
+                <td>8-12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pulling movement: Dumbbell rows or shrugs bracing upper body against an incline bench</td>
+                <td>2</td>
+                <td>12-15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pulling movement: Close grip pulldowns</td>
+                <td>2</td>
+                <td>15-20</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy shoulder movement: Seated dumbbell presses</td>
+                <td>3</td>
+                <td>8-12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy shoulder movement: Upright rows</td>
+                <td>2</td>
+                <td>12-15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy shoulder movement: Side lateral raises with dumbbells or cables</td>
+                <td>3</td>
+                <td>12-20</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="spacer"><td colspan="7"></td></tr>
+
+            <!-- Day 5 -->
+            <tr class="hypDayHead"><td colspan="7"><strong>Day 5: Lower Body Hypertrophy Day</strong></td></tr>
+            <tr class="hypDay">
+                <td>Lower Body Power Exercise speed work: Squats</td>
+                <td>6</td>
+                <td>3 (65-70% max)</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pressing movement: Hack squats</td>
+                <td>3</td>
+                <td>8-12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pressing movement: Leg presses</td>
+                <td>3</td>
+                <td>10-15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy extension movement: Leg extensions</td>
+                <td>3</td>
+                <td>15-20</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pulling movement: Romanian deadlifts</td>
+                <td>3</td>
+                <td>8-12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy curling movement: Glute ham raises or lying leg curls</td>
+                <td>3</td>
+                <td>12-15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy calf movement: Seated calf raise</td>
+                <td>4</td>
+                <td>10-15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="spacer" id="cutOffPoint"><td colspan="7"></td></tr>
+
+            <!-- Day 6 -->
+            <tr class="hypDayHead"><td colspan="7"><strong>Day 6: Chest and Arms Hypertrophy Day</strong></td></tr>
+            <tr class="hypDay">
+                <td>Pressing Power Exercise speed work: Flat dumbbell presses</td>
+                <td>6</td>
+                <td>3 (65-70% max)</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pressing movement: Incline dumbbell presses</td>
+                <td>3</td>
+                <td>8-12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pressing movement: Hammer strength chest press</td>
+                <td>3</td>
+                <td>12-15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy pressing movement: Incline cable flyes</td>
+                <td>2</td>
+                <td>15-20</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy curling movement: Cambered bar preacher curls</td>
+                <td>3</td>
+                <td>8-12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy curling movement: Dumbbell concentration curls</td>
+                <td>2</td>
+                <td>12-15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy extension movement: Seated triceps extensions with cambered bar</td>
+                <td>3</td>
+                <td>8-12</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="hypDay">
+                <td>Hypertrophy extension movement: Cable pressdowns with rope attachment</td>
+                <td>2</td>
+                <td>12-15</td>
+                <td></td><td></td><td></td><td></td>
+            </tr>
+            <tr class="spacer"><td colspan="7"></td></tr>
+            
+            <!-- Day 7 -->
+            <tr class="restDay"><td colspan="7"><strong>Day 7: Rest</strong></td></tr>
+            <tr class="spacer"><td colspan="7"></td></tr>
+
+        </tbody>
+    </table>
+
+    <button id="download-pdf">Download as PDF</button>
+
+</body>
+</html>
