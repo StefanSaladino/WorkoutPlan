@@ -91,7 +91,7 @@ tbody tr:nth-child(even):not(.spacer):not(.powerDayHead):not(.hypDayHead):not(.r
 } 
 
 
-/* Responsive table design for mobile view */
+/*Responsive table design for mobile view*/
 @media screen and (max-width: 768px) {
     td, th {
         padding: 10px;

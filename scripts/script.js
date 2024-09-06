@@ -1,84 +1,79 @@
 document.addEventListener("DOMContentLoaded", function() {
     const { jsPDF } = window.jspdf;
+
     document.getElementById('download-pdf').addEventListener('click', function () {
         const table = document.getElementById('workout-table');
-        const cutOffPoint = document.getElementById('cutOffPoint');
 
-        // Helper function to capture a table section
-        function captureTableSection(rows) {
-            const tempContainer = document.createElement('div');
-            tempContainer.style.position = 'absolute';
-            tempContainer.style.top = '-9999px';
-            document.body.appendChild(tempContainer);
+        // Helper function to capture the full table content
+        function captureTable() {
+            return new Promise((resolve) => {
+                const viewportMeta = document.querySelector('meta[name=viewport]');
+                const previousContent = viewportMeta.getAttribute('content');
+                viewportMeta.setAttribute('content', 'width=1920, initial-scale=1, maximum-scale=1');
 
-            const clonedTable = document.createElement('table');
-            clonedTable.style.width = '100%';
-            clonedTable.appendChild(table.querySelector('thead').cloneNode(true));
-            const tbody = document.createElement('tbody');
-            rows.forEach(row => tbody.appendChild(row.cloneNode(true)));
-            clonedTable.appendChild(tbody);
-            tempContainer.appendChild(clonedTable);
+                const tempContainer = document.createElement('div');
+                tempContainer.style.position = 'absolute';
+                tempContainer.style.top = '-9999px';
+                document.body.appendChild(tempContainer);
 
-            return html2canvas(clonedTable).then(canvas => {
-                document.body.removeChild(tempContainer);
-                return canvas.toDataURL('image/png');
+                const clonedTable = table.cloneNode(true);
+                clonedTable.style.width = '100%';
+                tempContainer.appendChild(clonedTable);
+
+                html2canvas(clonedTable, { scale: 2, useCORS: true }).then(canvas => {
+                    document.body.removeChild(tempContainer);
+                    viewportMeta.setAttribute('content', previousContent);
+
+                    resolve(canvas.toDataURL('image/png'));
+                });
             });
         }
 
-        // Split the rows into two sections based on the cutoff point
-        const firstPart = [];
-        const secondPart = [];
-        let isAfterCutoff = false;
-
-        Array.from(table.querySelectorAll('tbody > tr')).forEach(row => {
-            if (row === cutOffPoint) {
-                isAfterCutoff = true;
-            } else if (isAfterCutoff) {
-                secondPart.push(row);
-            } else {
-                firstPart.push(row);
-            }
-        });
-
-        // Create a PDF
-        const pdf = new jsPDF('p', 'mm', 'a4');
-
-        // Capture the first part
-        captureTableSection(firstPart).then(imgData1 => {
+        // Helper function to add an image to PDF with handling for overflow
+        function addContentToPDF(imgData) {
+            const pdf = new jsPDF('p', 'mm', 'a4');
             const pageWidth = pdf.internal.pageSize.getWidth();
             const pageHeight = pdf.internal.pageSize.getHeight();
 
-            // Fit the image to the full page height
-            const imgWidth = pageWidth;
-            const imgHeight = pageHeight;
+            const img = new Image();
+            img.src = imgData;
+            img.onload = () => {
+                const imgWidth = img.width;
+                const imgHeight = img.height;
 
-            pdf.addImage(imgData1, 'PNG', 0, 0, imgWidth, imgHeight);
-            pdf.addPage();
+                // Calculate scale to fit the image within the PDF width
+                const scale = pageWidth / imgWidth;
+                const scaledImgHeight = imgHeight * scale;
 
-            // Capture the second part
-            captureTableSection(secondPart).then(imgData2 => {
-                const img = new Image();
-                img.src = imgData2;
-                img.onload = () => {
-                    const pageWidth = pdf.internal.pageSize.getWidth();
-                    const pageHeight = pdf.internal.pageSize.getHeight();
-                    
-                    const imgWidth = img.width;
-                    const imgHeight = img.height;
+                let y = 0;
+                let remainingHeight = scaledImgHeight;
 
-                    // Calculate scale to fit the image width to page width
-                    const scale = pageWidth / imgWidth;
-                    const scaledImgWidth = pageWidth;
-                    const scaledImgHeight = imgHeight * scale;
+                // Add content to PDF, handling page breaks
+                while (remainingHeight > 0) {
+                    // Calculate the height to fit on the current page
+                    const heightOnPage = Math.min(remainingHeight, pageHeight);
 
-                    // Position the image at the top of the page
-                    const x = 0; // No horizontal centering needed as width fits the page
-                    const y = 0; // Set y to 0 to place image at the top of the page
+                    // Add the image section to the current page
+                    pdf.addImage(imgData, 'PNG', 0, y, pageWidth, heightOnPage);
 
-                    pdf.addImage(imgData2, 'PNG', x, y, scaledImgWidth, scaledImgHeight);
-                    pdf.save('workout-plan.pdf');
-                };
-            });
+                    // Update remaining height and adjust y position for the next section
+                    remainingHeight -= heightOnPage;
+                    y -= heightOnPage;
+
+                    // Add a new page if there is more content
+                    // if (remainingHeight > 0) {
+                    //     pdf.addPage();
+                    // }
+                }
+
+                // Save the PDF
+                pdf.save('workout-plan.pdf');
+            };
+        }
+
+        // Capture the full table content and create the PDF
+        captureTable().then(imgData => {
+            addContentToPDF(imgData);
         });
     });
 });
